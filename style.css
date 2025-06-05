@@ -122,7 +122,7 @@ p {
     margin-bottom: 0;
 }
 
-/* WhatsApp Button */
+/* WhatsApp Button - Efeito de Pulsação */
 .whatsapp-button {
     position: fixed;
     bottom: 30px;
@@ -138,15 +138,46 @@ p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 999;
     transition: 0.3s;
+    animation: pulse 2s infinite;
 }
 
 .whatsapp-button:hover {
     transform: scale(1.1);
+    animation: none; /* Remove a animação no hover */
 }
 
 .whatsapp-button img {
     width: 30px;
     height: 30px;
+}
+
+/* Animação de pulsação */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* Adicione esta animação para o movimento vertical */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 /* Dropdown Menu */
@@ -275,4 +306,179 @@ h1:first-of-type {
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+/* Seção Sobre - Escondida inicialmente */
+.hidden-section {
+    display: none;
+}
+
+/* Container principal */
+.sobre-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Layout do conteúdo */
+.sobre-content {
+    display: flex;
+    gap: 50px;
+    margin-top: 30px;
+    align-items: flex-start;
+}
+
+/* Coluna de texto */
+.sobre-texto {
+    flex: 1;
+    min-width: 300px;
+}
+
+.timeline-item {
+    margin-bottom: 35px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-item h3 {
+    color: #d62823;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.timeline-item h3::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 8px;
+    width: 15px;
+    height: 15px;
+    background-color: #d62823;
+    border-radius: 50%;
+}
+
+.timeline-item p {
+    color: #333;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.destaque-filosofia {
+    background: rgba(214, 40, 35, 0.08);
+    border-left: 3px solid #d62823;
+    padding: 20px;
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.destaque-filosofia p {
+    font-style: italic;
+    margin: 0;
+}
+
+.destaque-filosofia .icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Coluna de imagens */
+.sobre-galeria {
+    flex: 1;
+    min-width: 300px;
+}
+
+.foto-destaque img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+.mini-galeria {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.mini-galeria img {
+    width: 100%;
+    border-radius: 6px;
+    transition: transform 0.3s;
+}
+
+.mini-galeria img:hover {
+    transform: scale(1.03);
+}
+
+.legenda {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .sobre-content {
+        flex-direction: column;
+    }
+    
+    .timeline-item {
+        padding-left: 25px;
+    }
+    
+    .timeline-item h3::before {
+        left: -25px;
+    }
+}
+
+
+/* Notas Musicais no Fundo */
+.musical-notes-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.note {
+    position: absolute;
+    opacity: 0.3;
+    font-size: 30px;
+    color: rgba(255, 0, 0, 0.685); /* Cor vermelha com transparência */
+    user-select: none;
+}
+
+/* Efeitos de vibração */
+@keyframes vibrate-1 {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes vibrate-2 {
+    0% { transform: translate(0) rotate(0deg); }
+    25% { transform: translate(2px, 2px) rotate(2deg); }
+    50% { transform: translate(-2px, -2px) rotate(-2deg); }
+    75% { transform: translate(3px, -2px) rotate(3deg); }
+    100% { transform: translate(0) rotate(0deg); }
+}
+
+.vibrate-1 {
+    animation: vibrate-1 0.3s infinite;
+}
+
+.vibrate-2 {
+    animation: vibrate-2 0.4s infinite;
 }
