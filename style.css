@@ -630,12 +630,12 @@ body.dark-mode .theme-toggle {
     color: #ffffff;
 }
 
+
 /* Ajuste fino para a imagem do ícone */
 .theme-toggle img {
     margin: 0 auto; /* Centraliza horizontalmente */
     display: block; /* Remove espaçamento extra */
 }
-
 
 /* Menu Mobile */
 .mobile-menu-toggle {
@@ -734,5 +734,40 @@ body.dark-mode .theme-toggle {
     .dropdown:hover .dropdown-content,
     .dropdown:focus-within .dropdown-content {
         display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Remove o hover e faz funcionar apenas com clique */
+    .dropdown-content {
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+        transition: none;
+    }
+    
+    .dropdown.active .dropdown-content {
+        display: block;
+        margin-top: 10px;
+        margin-left: 15px;
+        border-left: 2px solid #d62823;
+        padding-left: 10px;
+    }
+    
+    .dropdown > a {
+        position: relative;
+        padding-right: 20px;
+    }
+    
+    .dropdown > a::after {
+        content: '+';
+        position: absolute;
+        right: 0;
+        transition: transform 0.3s;
+    }
+    
+    .dropdown.active > a::after {
+        content: '-';
     }
 }

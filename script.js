@@ -166,23 +166,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Menu Mobile
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const mainNav = document.querySelector('.main-nav');
     
+    // Menu mobile principal
     menuToggle.addEventListener('click', function() {
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
         this.setAttribute('aria-expanded', !isExpanded);
         mainNav.classList.toggle('active');
     });
     
-    // Fechar menu ao clicar em um link
-    const navLinks = document.querySelectorAll('.main-nav a');
+    // Dropdown de contato no mobile
+    const dropdownToggle = document.querySelector('.dropdown > a');
+    const dropdown = document.querySelector('.dropdown');
+    
+    dropdownToggle.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+        }
+    });
+    
+    // Fechar menu ao clicar em um link (exceto dropdown)
+    const navLinks = document.querySelectorAll('.main-nav a:not(.dropdown > a)');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            menuToggle.setAttribute('aria-expanded', 'false');
-            mainNav.classList.remove('active');
+            if (window.innerWidth <= 768) {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                mainNav.classList.remove('active');
+            }
         });
+    });
+    
+    // Fechar dropdown ao clicar fora (opcional)
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768 && !dropdown.contains(e.target) && !e.target.classList.contains('dropdown-toggle')) {
+            dropdown.classList.remove('active');
+        }
     });
 });
