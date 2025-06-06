@@ -5,7 +5,7 @@
     font-family: 'Arial', sans-serif;
 }
 body {
-    background-color: #f9f9f9;
+    background-color: antiquewhite;
     color: #333;
 }
 header {
@@ -38,15 +38,22 @@ nav ul {
     display: flex;
     list-style: none;
     font-size: 17px;
+    align-items: center;
+    height: 100%;
 }
 nav ul li {
     margin-left: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 nav ul li a {
-    color: rgb(253, 0, 0);
+    color: rgb(253, 253, 253);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 5px 0;
     text-decoration: none;
-    font-weight: 500;
-    transition: 0.3s;
 }
 nav ul li a:hover {
     opacity: 0.8;
@@ -197,7 +204,7 @@ p {
 }
 
 .dropdown-content a {
-    color: #f80800;
+    color: #ffffff;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -481,4 +488,151 @@ h1:first-of-type {
 
 .vibrate-2 {
     animation: vibrate-2 0.4s infinite;
+}
+
+
+/* Botão Dark/Light Mode */
+.theme-item {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+    height: 100%;
+}
+
+/* Estilo para o botão de tema com imagens */
+.theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.theme-icon {
+    width: 50px;
+    height: 50px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    object-fit: contain; /* Mantém a proporção da imagem */
+    position: absolute;
+}
+
+.sun-icon {
+    opacity: 1;
+}
+
+.moon-icon {
+    opacity: 0;
+}
+
+body.dark-mode .sun-icon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+body.dark-mode .moon-icon {
+    opacity: 1;
+    transform: rotate(0);
+}
+
+.theme-toggle:hover .sun-icon {
+    transform: rotate(20deg);
+}
+
+.theme-toggle:hover .moon-icon {
+    transform: rotate(-10deg);
+}
+
+
+/* Estilos para o modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+body.dark-mode header {
+    background: linear-gradient(90deg, #121212 0%, #1e1e1e 100%);
+}
+
+
+body.dark-mode nav ul li a {
+    color: #f0f0f0;
+}
+
+body.dark-mode .course-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .course-content h3 {
+    color: #f0f0f0;
+}
+
+body.dark-mode .course-content p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .categoria-titulo {
+    color: #25D366;
+    border-bottom-color: #25D366;
+}
+
+body.dark-mode .whatsapp-button {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .timeline-item h3 {
+    color: #25D366;
+}
+
+body.dark-mode .timeline-item h3::before {
+    background-color: #25D366;
+}
+
+body.dark-mode .destaque-filosofia {
+    background: rgba(37, 211, 102, 0.08);
+    border-left: 3px solid #25D366;
+}
+
+body.dark-mode h1:not(:first-of-type) {
+    color: #ffffff !important;
+}
+
+body.dark-mode .sobre-container,
+body.dark-mode .sobre-texto,
+body.dark-mode .timeline-item p,
+body.dark-mode .destaque-filosofia p {
+    color: #ffffff !important;
+}
+
+body.dark-mode .note {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+body.dark-mode h1:first-of-type {
+    color: #d62823 !important;
+}
+
+body.dark-mode .legenda {
+    color: #b0b0b0 !important;
+}
+
+.note:hover {
+    opacity: 0.8 !important;
+}
+
+/* Ajuste para o tema-toggle no dark mode */
+body.dark-mode .theme-toggle {
+    color: #ffffff;
+}
+
+
+/* Ajuste fino para a imagem do ícone */
+.theme-toggle img {
+    margin: 0 auto; /* Centraliza horizontalmente */
+    display: block; /* Remove espaçamento extra */
 }

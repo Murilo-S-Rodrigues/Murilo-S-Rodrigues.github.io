@@ -59,40 +59,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Cria notas musicais aleatórias no fundo
 function createMusicalNotes() {
     const notesContainer = document.createElement('div');
     notesContainer.className = 'musical-notes-bg';
     document.body.appendChild(notesContainer);
 
-    // Símbolos de notas musicais
     const musicalSymbols = ['♪', '♫', '♩', '♬', '♭', '♮', '♯'];
     
-    // Cria 20 notas musicais
     for (let i = 0; i < 20; i++) {
         const note = document.createElement('div');
         note.className = 'note';
         note.textContent = musicalSymbols[Math.floor(Math.random() * musicalSymbols.length)];
         
-        // Posição aleatória
         note.style.left = `${Math.random() * 100}%`;
         note.style.top = `${Math.random() * 100}%`;
         
-        // Tamanho aleatório
         const size = 20 + Math.random() * 30;
         note.style.fontSize = `${size}px`;
-        
-        // Opacidade aleatória
         note.style.opacity = 0.1 + Math.random() * 0.4;
         
-        // Adiciona classe de vibração aleatória (algumas notas vibram, outras não)
         if (Math.random() > 0.5) {
             note.classList.add(Math.random() > 0.5 ? 'vibrate-1' : 'vibrate-2');
         }
         
         notesContainer.appendChild(note);
         
-        // Muda aleatoriamente a vibração das notas
         setInterval(() => {
             if (Math.random() > 0.7) {
                 note.classList.toggle('vibrate-1');
@@ -100,6 +91,10 @@ function createMusicalNotes() {
             if (Math.random() > 0.7) {
                 note.classList.toggle('vibrate-2');
             }
+            // Atualiza a cor conforme o tema
+            note.style.color = document.body.classList.contains('dark-mode') 
+                ? 'rgba(255, 255, 255, 0.6)' 
+                : 'rgba(255, 0, 0, 0.6)';
         }, 3000 + Math.random() * 5000);
     }
 }
@@ -127,5 +122,46 @@ function animateWhatsAppButton() {
     }, 8000);
 }
 
-// Chama a função quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', animateWhatsAppButton);
+// Chama as funções quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    // Suas outras funções existentes...
+    animateWhatsAppButton();
+    createMusicalNotes();
+    // Não precisa chamar novamente o dark mode aqui pois já está no listener
+});
+
+
+// Dark/Light Mode Toggle com imagens
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Verifica o tema salvo ou preferência do sistema
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    // Aplica o tema
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Alternador de temas
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        
+        // Salva a preferência
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        
+        // Atualiza as notas musicais
+        updateNotesColor();
+    });
+    
+    // Função para atualizar cor das notas
+    function updateNotesColor() {
+        const notes = document.querySelectorAll('.note');
+        notes.forEach(note => {
+            note.style.color = document.body.classList.contains('dark-mode') 
+                ? 'rgba(255, 255, 255, 0.6)' 
+                : 'rgba(255, 0, 0, 0.6)';
+        });
+    }
+});
